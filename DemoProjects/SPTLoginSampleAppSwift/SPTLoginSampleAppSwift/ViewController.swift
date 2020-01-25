@@ -2,8 +2,8 @@ import UIKit
 
 class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate {
 
-    fileprivate let SpotifyClientID = "044b2c45e77f45aca8da89e338849b6a"
-    fileprivate let SpotifyRedirectURI = URL(string: "spotify-login-sdk-test-app://spotify-login-callback")!
+    fileprivate let SpotifyClientID = "71d18cb9b32c480d951eed41512df8fc"
+    fileprivate let SpotifyRedirectURI = URL(string: "partymusic://callback")!
 
     lazy var configuration: SPTConfiguration = {
         let configuration = SPTConfiguration(clientID: SpotifyClientID, redirectURL: SpotifyRedirectURI)
@@ -13,8 +13,8 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
 
         // Set these url's to your backend which contains the secret to exchange for an access token
         // You can use the provided ruby script spotify_token_swap.rb for testing purposes
-        configuration.tokenSwapURL = URL(string: "http://localhost:1234/swap")
-        configuration.tokenRefreshURL = URL(string: "http://localhost:1234/refresh")
+        configuration.tokenSwapURL = URL(string: "https://paywallios2.herokuapp.com/swap")
+        configuration.tokenRefreshURL = URL(string: "https://paywallios2.herokuapp.com/refresh")
         return configuration
     }()
 
