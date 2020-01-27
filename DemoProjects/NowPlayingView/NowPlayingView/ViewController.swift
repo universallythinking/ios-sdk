@@ -13,16 +13,16 @@ class ViewController: PartyViewController,
     private let name = "Now Playing View"
 
     private var currentPodcastSpeed: SPTAppRemotePodcastPlaybackSpeed?
-    var timerInterval = 15.0
+    var timerInterval = 1.2
     // MARK: - Lifecycle
 
     private var connectionIndicatorView = ConnectionStatusIndicatorView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupWebViews()
         appRemote.authorizeAndPlayURI("")
-        
+        setupWebViews()
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: connectionIndicatorView)
         connectionIndicatorView.frame = CGRect(origin: CGPoint(), size: CGSize(width: 20,height: 20))
 
@@ -127,7 +127,7 @@ class ViewController: PartyViewController,
     }
 
     @IBAction func didPressNextButton(_ sender: AnyObject) {
-        skipNext()
+        increment()
     }
 
     @IBAction func didPressPlayTrackButton(_ sender: AnyObject) {
@@ -173,7 +173,7 @@ class ViewController: PartyViewController,
 
     private func updatePlayerStateSubscriptionButtonState() {
         let playerStateSubscriptionButtonTitle = subscribedToPlayerState ? "Unsubscribe" : "Subscribe"
-        playerStateSubscriptionButton.setTitle(playerStateSubscriptionButtonTitle, for: UIControl.State())
+        //playerStateSubscriptionButton.setTitle(playerStateSubscriptionButtonTitle, for: UIControl.State())
     }
 
     // MARK: Capabilities
@@ -371,13 +371,15 @@ class ViewController: PartyViewController,
         appRemote.playerAPI?.play(identifier, callback: defaultCallback)
     }
 
-    private func subscribeToPlayerState() {
-        guard (!subscribedToPlayerState) else { return }
-        appRemote.playerAPI!.delegate = self
-        appRemote.playerAPI?.subscribe { (_, error) -> Void in
-            guard error == nil else { return }
-            self.subscribedToPlayerState = true
-            self.updatePlayerStateSubscriptionButtonState()
+    @objc func subscribeToPlayerState() {
+        if (appRemote.isConnected) {
+            guard (!subscribedToPlayerState) else { return }
+            appRemote.playerAPI!.delegate = self
+            appRemote.playerAPI?.subscribe { (_, error) -> Void in
+                guard error == nil else { return }
+                self.subscribedToPlayerState = true
+                self.updatePlayerStateSubscriptionButtonState()
+            }
         }
     }
 
@@ -450,7 +452,6 @@ class ViewController: PartyViewController,
     // MARK: - <SPTAppRemotePlayerStateDelegate>
     func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
         self.playerState = playerState
-        //updateViewWithPlayerState(playerState)
     }
 
     // MARK: - <SPTAppRemoteUserAPIDelegate>
@@ -518,12 +519,13 @@ class ViewController: PartyViewController,
                 let timeRemaining = (Int(playerState!.playbackPosition).distance(to: Int((playerState?.track.duration)!)) / 1000)
                 if (timeRemaining == 0) {
                     increment()
+                } else if (playerState!.playbackPosition == 0 && playerState!.isPaused) {
+                    increment()
                 } else if (timeRemaining < 30) {
                     timerInterval = 1.2
                 } else {
-                    timerInterval = 15.0
+                    timerInterval = 1.2
                 }
-                mediaControls()
             }
             else {
                 connect()

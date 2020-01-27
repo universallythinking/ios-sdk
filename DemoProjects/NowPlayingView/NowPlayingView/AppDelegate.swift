@@ -61,6 +61,7 @@ class AppDelegate: UIResponder,
         //appRemote.disconnect()
         if (connected) {
             appRemote.connect()
+            ViewController().subscribeToPlayerState()
         }
     }
     
