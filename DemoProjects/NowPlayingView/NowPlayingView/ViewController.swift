@@ -1,7 +1,8 @@
 import UIKit
 import StoreKit
+import MediaPlayer
 
-class ViewController: UIViewController,
+class ViewController: PartyViewController,
                       SPTAppRemotePlayerStateDelegate,
                       SPTAppRemoteUserAPIDelegate,
                       SpeedPickerViewControllerDelegate,
@@ -12,14 +13,16 @@ class ViewController: UIViewController,
     private let name = "Now Playing View"
 
     private var currentPodcastSpeed: SPTAppRemotePodcastPlaybackSpeed?
-
+    var timerInterval = 15.0
     // MARK: - Lifecycle
 
     private var connectionIndicatorView = ConnectionStatusIndicatorView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupWebViews()
+        appRemote.authorizeAndPlayURI("")
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: connectionIndicatorView)
         connectionIndicatorView.frame = CGRect(origin: CGPoint(), size: CGSize(width: 20,height: 20))
 
@@ -39,10 +42,10 @@ class ViewController: UIViewController,
         skipForward15Button.setImage(skipForward15Button.imageView?.image?.withRenderingMode(.alwaysTemplate), for: .normal)
         skipBackward15Button.isHidden = true
         skipForward15Button.isHidden = true
+        Timer.scheduledTimer(timeInterval: timerInterval, target: self, selector: #selector(self.getPlayerStateMS), userInfo: nil, repeats: true)
     }
 
     // MARK: - View
-
     @IBOutlet weak var trackNameLabel: UILabel!
     @IBOutlet var buttons: [UIButton]!
     
@@ -89,7 +92,6 @@ class ViewController: UIViewController,
     }
 
     // MARK: Podcast Support
-
     private func updateInterfaceForPodcast(playerState: SPTAppRemotePlayerState) {
         skipForward15Button.isHidden = !playerState.track.isEpisode
         skipBackward15Button.isHidden = !playerState.track.isEpisode
@@ -105,7 +107,6 @@ class ViewController: UIViewController,
     }
 
     // MARK: Player Control
-
     @IBOutlet weak var playPauseButton: UIButton!
 
     @IBAction func didPressPlayPauseButton(_ sender: AnyObject) {
@@ -156,7 +157,6 @@ class ViewController: UIViewController,
     }
 
     // MARK: Player State
-
     @IBOutlet weak var playerStateSubscriptionButton: UIButton!
 
     @IBAction func didPressGetPlayerStateButton(_ sender: AnyObject) {
@@ -177,7 +177,6 @@ class ViewController: UIViewController,
     }
 
     // MARK: Capabilities
-
     @IBOutlet weak var onDemandCapabilitiesLabel: UILabel!
     @IBOutlet weak var capabilitiesSubscriptionButton: UIButton!
 
@@ -203,7 +202,6 @@ class ViewController: UIViewController,
     }
 
     // MARK: Shuffle Button
-
     @IBOutlet weak var toggleShuffleButton: UIButton!
     @IBOutlet weak var shuffleModeLabel: UILabel!
 
@@ -215,7 +213,6 @@ class ViewController: UIViewController,
     }
 
     // MARK: Repeat Mode Button
-
     @IBOutlet weak var toggleRepeatModeButton: UIButton!
     @IBOutlet weak var repeatModeLabel: UILabel!
     @IBAction func didPressToggleRepeatModeButton(_ sender: AnyObject) {
@@ -234,7 +231,6 @@ class ViewController: UIViewController,
     }
 
     // MARK: Album Art
-
     @IBOutlet weak var albumArtImageView: UIImageView!
 
     private func updateAlbumArtWithImage(_ image: UIImage) {
@@ -274,7 +270,6 @@ class ViewController: UIViewController,
     }
 
     // MARK: StoreKit
-
     private func showAppStoreInstall() {
         if TARGET_OS_SIMULATOR != 0 {
             presentAlert(title: "Simulator In Use", message: "The App Store is not available in the iOS simulator, please test this feature on a physical device.")
@@ -331,7 +326,7 @@ class ViewController: UIViewController,
         appRemote.playerAPI?.skip(toNext: defaultCallback)
     }
 
-    private func skipPrevious() {
+    func skipPrevious() {
         appRemote.playerAPI?.skip(toPrevious: defaultCallback)
     }
 
@@ -361,7 +356,7 @@ class ViewController: UIViewController,
             guard error == nil else { return }
 
             let playerState = result as! SPTAppRemotePlayerState
-            self.updateViewWithPlayerState(playerState)
+            //self.updateViewWithPlayerState(playerState)
         }
     }
 
@@ -410,7 +405,6 @@ class ViewController: UIViewController,
     }
 
     // MARK: - Image API
-
     private func fetchAlbumArtForTrack(_ track: SPTAppRemoteTrack, callback: @escaping (UIImage) -> Void ) {
         appRemote.imageAPI?.fetchImage(forItem: track, with:CGSize(width: 1000, height: 1000), callback: { (image, error) -> Void in
             guard error == nil else { return }
@@ -428,7 +422,7 @@ class ViewController: UIViewController,
             guard error == nil else { return }
 
             let capabilities = capabilities as! SPTAppRemoteUserCapabilities
-            self.updateViewWithCapabilities(capabilities)
+            //self.updateViewWithCapabilities(capabilities)
         })
     }
 
@@ -454,16 +448,14 @@ class ViewController: UIViewController,
     }
 
     // MARK: - <SPTAppRemotePlayerStateDelegate>
-
     func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
         self.playerState = playerState
-        updateViewWithPlayerState(playerState)
+        //updateViewWithPlayerState(playerState)
     }
 
     // MARK: - <SPTAppRemoteUserAPIDelegate>
-
     func userAPI(_ userAPI: SPTAppRemoteUserAPI, didReceive capabilities: SPTAppRemoteUserCapabilities) {
-        updateViewWithCapabilities(capabilities)
+        //updateViewWithCapabilities(capabilities)
     }
 
     func showError(_ errorDescription: String) {
@@ -481,8 +473,62 @@ class ViewController: UIViewController,
         subscribeToPlayerState()
         subscribeToCapabilityChanges()
         getPlayerState()
-
         enableInterface(true)
+    }
+    
+    func mediaControls() {
+        
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        let commandCenter = MPRemoteCommandCenter.shared()
+
+        commandCenter.nextTrackCommand.addTarget { (event) -> MPRemoteCommandHandlerStatus in
+            self.increment()
+            return .success
+        }
+    }
+    
+    var playerViewController: ViewController {
+        get {
+            let navController = self.children[0] as! UINavigationController
+            return navController.topViewController as! ViewController
+        }
+    }
+    
+    func connect() {
+        appRemote.connect()
+    }
+    
+    func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
+        playerViewController.appRemoteConnected()
+    }
+    
+    func updateState() {
+        if (appRemote.isConnected) {
+            unsubscribeFromPlayerState()
+            subscribeToPlayerState()
+        } else {
+            connect()
+        }
+    }
+    
+    @objc func getPlayerStateMS() {
+        if (appRemote.isConnected) {
+            if (playerState != nil) {
+                updateState()
+                let timeRemaining = (Int(playerState!.playbackPosition).distance(to: Int((playerState?.track.duration)!)) / 1000)
+                if (timeRemaining == 0) {
+                    increment()
+                } else if (timeRemaining < 30) {
+                    timerInterval = 1.2
+                } else {
+                    timerInterval = 15.0
+                }
+                mediaControls()
+            }
+            else {
+                connect()
+            }
+        }
     }
 
     func appRemoteDisconnect() {
@@ -493,7 +539,6 @@ class ViewController: UIViewController,
     }
 
     // MARK: - SpeedPickerViewController
-
     func speedPickerDidCancel(viewController: SpeedPickerViewController) {
         viewController.dismiss(animated: true, completion: nil)
     }
@@ -506,5 +551,21 @@ class ViewController: UIViewController,
             self.updatePodcastSpeed(speed: speed)
         })
         viewController.dismiss(animated: true, completion: nil)
+    }
+    
+    func playSong(song: String) {
+        let str = "spotify:track:\(song)"
+        //unless declared this way, I get an "ambiguous reference error"
+        appRemote.playerAPI?.play(str, callback: defaultCallback)
+    }
+    
+    func playPause() {
+        if (appRemote.isConnected) {
+            if playerState!.isPaused {
+                startPlayback()
+            } else {
+                pausePlayback()
+            }
+        }
     }
 }

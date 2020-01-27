@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22762D3623DCF04B00B4016E /* PartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22762D3523DCF04B00B4016E /* PartyViewController.swift */; };
+		228B106C23DD0253003ADC0E /* guest in Resources */ = {isa = PBXBuildFile; fileRef = 228B106A23DD0252003ADC0E /* guest */; };
+		228B106D23DD0253003ADC0E /* public in Resources */ = {isa = PBXBuildFile; fileRef = 228B106B23DD0252003ADC0E /* public */; };
 		541345A220D2A80300FD05F7 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 541345A120D2A80300FD05F7 /* SpotifyiOS.framework */; };
 		54AC7EE020081243008CD692 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AC7EDF20081243008CD692 /* AppDelegate.swift */; };
 		54AC7EE220081243008CD692 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AC7EE120081243008CD692 /* ViewController.swift */; };
@@ -29,6 +32,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		22762D3523DCF04B00B4016E /* PartyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartyViewController.swift; sourceTree = "<group>"; };
+		228B106A23DD0252003ADC0E /* guest */ = {isa = PBXFileReference; lastKnownFileType = folder; path = guest; sourceTree = "<group>"; };
+		228B106B23DD0252003ADC0E /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
 		5413459E20D1049200FD05F7 /* SPTLoginSampleAppSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SPTLoginSampleAppSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		541345A120D2A80300FD05F7 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyiOS.framework; path = ../../SpotifyiOS.framework; sourceTree = "<group>"; };
 		54AC7EDC20081243008CD692 /* SPTLoginSampleAppSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPTLoginSampleAppSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +86,8 @@
 		54AC7EDE20081243008CD692 /* SPTLoginSampleAppSwift */ = {
 			isa = PBXGroup;
 			children = (
+				228B106A23DD0252003ADC0E /* guest */,
+				228B106B23DD0252003ADC0E /* public */,
 				54AC7EDF20081243008CD692 /* AppDelegate.swift */,
 				54BDA679200E8A74005E72F1 /* ConnectButton.swift */,
 				54AC7EE120081243008CD692 /* ViewController.swift */,
@@ -87,6 +95,7 @@
 				54AC7EE820081243008CD692 /* LaunchScreen.storyboard */,
 				54AC7EEB20081243008CD692 /* Info.plist */,
 				5413459E20D1049200FD05F7 /* SPTLoginSampleAppSwift-Bridging-Header.h */,
+				22762D3523DCF04B00B4016E /* PartyViewController.swift */,
 			);
 			path = SPTLoginSampleAppSwift;
 			sourceTree = "<group>";
@@ -152,6 +161,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				228B106C23DD0253003ADC0E /* guest in Resources */,
+				228B106D23DD0253003ADC0E /* public in Resources */,
 				54AC7EEA20081243008CD692 /* LaunchScreen.storyboard in Resources */,
 				54AC7EE720081243008CD692 /* Assets.xcassets in Resources */,
 			);
@@ -167,6 +178,7 @@
 				54BDA67A200E8A74005E72F1 /* ConnectButton.swift in Sources */,
 				54AC7EE220081243008CD692 /* ViewController.swift in Sources */,
 				54AC7EE020081243008CD692 /* AppDelegate.swift in Sources */,
+				22762D3623DCF04B00B4016E /* PartyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

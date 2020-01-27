@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22145B0B23DEC4D90098A9FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22145B0A23DEC4D90098A9FE /* Assets.xcassets */; };
+		22145B0E23DED0010098A9FE /* public in Resources */ = {isa = PBXBuildFile; fileRef = 22145B0C23DED0010098A9FE /* public */; };
+		22145B0F23DED0010098A9FE /* guest in Resources */ = {isa = PBXBuildFile; fileRef = 22145B0D23DED0010098A9FE /* guest */; };
+		22218B4723DE5CD000C5960C /* PartyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22218B4323DE5CCF00C5960C /* PartyViewController.swift */; };
 		2BAD4B251CFD66290033DE75 /* My-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAD4B241CFD66290033DE75 /* My-Extensions.swift */; };
 		54266D9121ACB40D00E10A41 /* SpeedPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54266D9021ACB40D00E10A41 /* SpeedPickerViewController.swift */; };
 		546D86B52139DB76002AD06E /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 546D86B42139DB76002AD06E /* SpotifyiOS.framework */; };
@@ -15,7 +19,6 @@
 		F4F973F01CAD60320036411D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F973EF1CAD60320036411D /* AppDelegate.swift */; };
 		F4F973F21CAD60320036411D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F973F11CAD60320036411D /* ViewController.swift */; };
 		F4F973F51CAD60320036411D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4F973F31CAD60320036411D /* Main.storyboard */; };
-		F4F973F71CAD60320036411D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4F973F61CAD60320036411D /* Assets.xcassets */; };
 		F4F973FA1CAD60320036411D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4F973F81CAD60320036411D /* LaunchScreen.storyboard */; };
 		F4F974051CAD60C60036411D /* host.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = F4F974041CAD60C60036411D /* host.entitlements */; };
 		F6EB42E11D2BB01100F57322 /* ContentItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB42E01D2BB01100F57322 /* ContentItemCell.swift */; };
@@ -23,18 +26,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		22145B0A23DEC4D90098A9FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../swagger/iOS/ios-sdk-beta-25 2/Demo Projects/SwaggerJKBX/Simple Track Playback/Assets.xcassets"; sourceTree = "<group>"; };
+		22145B0C23DED0010098A9FE /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; name = public; path = ../../../../swagger/Android/Pm/app/src/main/assets/www/public; sourceTree = "<group>"; };
+		22145B0D23DED0010098A9FE /* guest */ = {isa = PBXFileReference; lastKnownFileType = folder; name = guest; path = ../../../../swagger/Android/Pm/app/src/main/assets/www/guest; sourceTree = "<group>"; };
+		22218B4323DE5CCF00C5960C /* PartyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartyViewController.swift; sourceTree = "<group>"; };
 		2BAD4B241CFD66290033DE75 /* My-Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "My-Extensions.swift"; sourceTree = "<group>"; };
 		54266D9021ACB40D00E10A41 /* SpeedPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedPickerViewController.swift; sourceTree = "<group>"; };
 		546D86B42139DB76002AD06E /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyiOS.framework; path = ../../SpotifyiOS.framework; sourceTree = "<group>"; };
 		998FF9BD1D3E54AC003E339B /* ConnectionStatusIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionStatusIndicatorView.swift; sourceTree = "<group>"; };
 		99A0FFE31D38F9B600A90453 /* PlaybackButtonGraphics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackButtonGraphics.swift; sourceTree = "<group>"; };
-		F4F973EC1CAD60320036411D /* NowPlayingView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NowPlayingView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4F973EC1CAD60320036411D /* Swagger Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swagger Music.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F973EF1CAD60320036411D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4F973F11CAD60320036411D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F4F973F41CAD60320036411D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F4F973F61CAD60320036411D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4F973F91CAD60320036411D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F4F973FB1CAD60320036411D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4F974041CAD60C60036411D /* host.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = host.entitlements; sourceTree = "<group>"; };
 		F4F974081CAD62D40036411D /* NowPlayingView-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NowPlayingView-Bridging-Header.h"; sourceTree = "<group>"; };
 		F6EB42E01D2BB01100F57322 /* ContentItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentItemCell.swift; sourceTree = "<group>"; };
@@ -65,7 +70,7 @@
 		F4F973ED1CAD60320036411D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F4F973EC1CAD60320036411D /* NowPlayingView.app */,
+				F4F973EC1CAD60320036411D /* Swagger Music.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,17 +78,19 @@
 		F4F973EE1CAD60320036411D /* NowPlayingView */ = {
 			isa = PBXGroup;
 			children = (
+				22145B0D23DED0010098A9FE /* guest */,
+				22145B0C23DED0010098A9FE /* public */,
 				F4F973EF1CAD60320036411D /* AppDelegate.swift */,
 				F4F973F11CAD60320036411D /* ViewController.swift */,
 				F6EB42E01D2BB01100F57322 /* ContentItemCell.swift */,
 				F6EB42E21D2BB0D800F57322 /* ContentCollectionViewController.swift */,
 				2BAD4B241CFD66290033DE75 /* My-Extensions.swift */,
-				F4F973F61CAD60320036411D /* Assets.xcassets */,
+				22145B0A23DEC4D90098A9FE /* Assets.xcassets */,
 				F4F973F31CAD60320036411D /* Main.storyboard */,
 				F4F973F81CAD60320036411D /* LaunchScreen.storyboard */,
-				F4F973FB1CAD60320036411D /* Info.plist */,
 				F4F974041CAD60C60036411D /* host.entitlements */,
 				F4F974081CAD62D40036411D /* NowPlayingView-Bridging-Header.h */,
+				22218B4323DE5CCF00C5960C /* PartyViewController.swift */,
 				99A0FFE31D38F9B600A90453 /* PlaybackButtonGraphics.swift */,
 				998FF9BD1D3E54AC003E339B /* ConnectionStatusIndicatorView.swift */,
 				54266D9021ACB40D00E10A41 /* SpeedPickerViewController.swift */,
@@ -116,7 +123,7 @@
 			);
 			name = NowPlayingView;
 			productName = NowPlayingView;
-			productReference = F4F973EC1CAD60320036411D /* NowPlayingView.app */;
+			productReference = F4F973EC1CAD60320036411D /* Swagger Music.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -131,7 +138,7 @@
 				TargetAttributes = {
 					F4F973EB1CAD60320036411D = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 2FNC3A47ZF;
+						DevelopmentTeam = KQF8DWCCU8;
 						LastSwiftMigration = 0940;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -168,9 +175,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22145B0E23DED0010098A9FE /* public in Resources */,
 				F4F973FA1CAD60320036411D /* LaunchScreen.storyboard in Resources */,
 				F4F974051CAD60C60036411D /* host.entitlements in Resources */,
-				F4F973F71CAD60320036411D /* Assets.xcassets in Resources */,
+				22145B0F23DED0010098A9FE /* guest in Resources */,
+				22145B0B23DEC4D90098A9FE /* Assets.xcassets in Resources */,
 				F4F973F51CAD60320036411D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,6 +195,7 @@
 				99A0FFE41D38F9B600A90453 /* PlaybackButtonGraphics.swift in Sources */,
 				F6EB42E31D2BB0D800F57322 /* ContentCollectionViewController.swift in Sources */,
 				F4F973F21CAD60320036411D /* ViewController.swift in Sources */,
+				22218B4723DE5CD000C5960C /* PartyViewController.swift in Sources */,
 				2BAD4B251CFD66290033DE75 /* My-Extensions.swift in Sources */,
 				F6EB42E11D2BB01100F57322 /* ContentItemCell.swift in Sources */,
 				F4F973F01CAD60320036411D /* AppDelegate.swift in Sources */,
@@ -330,11 +340,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 2FNC3A47ZF;
+				DEVELOPMENT_TEAM = KQF8DWCCU8;
 				INFOPLIST_FILE = NowPlayingView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.testappremote;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.universallythinking.partymusic;
+				PRODUCT_NAME = "Swagger Music";
 				SWIFT_OBJC_BRIDGING_HEADER = "NowPlayingView/NowPlayingView-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -347,11 +357,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 2FNC3A47ZF;
+				DEVELOPMENT_TEAM = KQF8DWCCU8;
 				INFOPLIST_FILE = NowPlayingView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.testappremote;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.universallythinking.partymusic;
+				PRODUCT_NAME = "Swagger Music";
 				SWIFT_OBJC_BRIDGING_HEADER = "NowPlayingView/NowPlayingView-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;

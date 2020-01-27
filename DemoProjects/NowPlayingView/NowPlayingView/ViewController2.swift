@@ -1,6 +1,6 @@
 import UIKit
 
-class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate {
+class ViewController2: PartyViewController, SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate {
 
     fileprivate let SpotifyClientID = "71d18cb9b32c480d951eed41512df8fc"
     fileprivate let SpotifyRedirectURI = URL(string: "partymusic://callback")!
@@ -63,11 +63,16 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
         trackLabel.textAlignment = .center
         return trackLabel
     }()
+    
+    func showParty() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "LaunchScreen", bundle: nil)
+        let partyViewController = storyBoard.instantiateViewController(withIdentifier: "partyViewController") as! PartyViewController
+        self.present(partyViewController, animated: true, completion: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-
         view.addSubview(connectLabel)
         view.addSubview(connectButton)
         view.addSubview(disconnectButton)
@@ -107,6 +112,16 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
         disconnectButton.addTarget(self, action: #selector(didTapDisconnect(_:)), for: .touchUpInside)
 
         updateViewBasedOnConnected()
+        
+        let scope: SPTScope = [.appRemoteControl, .playlistReadPrivate]
+
+        if #available(iOS 11, *) {
+            // Use this on iOS 11 and above to take advantage of SFAuthenticationSession
+            sessionManager.initiateSession(with: scope, options: .clientOnly)
+        } else {
+            // Use this on iOS versions < 11 to use SFSafariViewController
+            sessionManager.initiateSession(with: scope, options: .clientOnly, presenting: self)
+        }
     }
 
     func update(playerState: SPTAppRemotePlayerState) {
@@ -208,6 +223,7 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
         appRemote.connectionParameters.accessToken = session.accessToken
         appRemote.connect()
+        //showParty()
     }
 
     // MARK: - SPTAppRemoteDelegate
@@ -247,5 +263,16 @@ class ViewController: UIViewController, SPTSessionManagerDelegate, SPTAppRemoteD
         controller.addAction(action)
         present(controller, animated: true)
     }
+    
+    func playSong(song: String) {
+        let str = "spotify:track:\(song)"
+        //unless declared this way, I get an "ambiguous reference error"
+        appRemote.playerAPI?.play(str, asRadio: false, callback: { (String, NSError) in
+            print("SONG: ", "success")
+            print("Error: ", NSError)
+        })
+        print("SONG: ", str)
+    }
+    
 }
 

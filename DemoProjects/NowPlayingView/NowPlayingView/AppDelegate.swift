@@ -4,10 +4,10 @@ import UIKit
 class AppDelegate: UIResponder,
     UIApplicationDelegate, SPTAppRemoteDelegate {
 
-    private let redirectUri = URL(string:"comspotifytestsdk://")!
-    private let clientIdentifier = "089d841ccc194c10a77afad9e1c11d54"
-    private let name = "Now Playing View"
-
+    private let redirectUri = URL(string:"partymusic://")!
+    private let clientIdentifier = "71d18cb9b32c480d951eed41512df8fc"
+    private let name = "Swagger Music"
+    var connected = false
     // keys
     static private let kAccessTokenKey = "access-token-key"
 
@@ -57,8 +57,11 @@ class AppDelegate: UIResponder,
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        playerViewController.appRemoteDisconnect()
-        appRemote.disconnect()
+        //playerViewController.appRemoteDisconnect()
+        //appRemote.disconnect()
+        if (connected) {
+            appRemote.connect()
+        }
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -68,6 +71,7 @@ class AppDelegate: UIResponder,
     func connect() {
         playerViewController.appRemoteConnecting()
         appRemote.connect()
+        connected = true
     }
 
     // MARK: AppRemoteDelegate
