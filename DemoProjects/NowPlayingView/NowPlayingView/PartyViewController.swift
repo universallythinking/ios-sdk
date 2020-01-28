@@ -11,7 +11,7 @@ import UIKit
 import WebKit
 
 class PartyViewController: UIViewController, WKNavigationDelegate {
-    var webViewIsSetup = false
+    
     var partyName = ""
     open lazy var webView: WKWebView = {
         DispatchQueue.main.sync {
@@ -25,7 +25,6 @@ class PartyViewController: UIViewController, WKNavigationDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
-        //setupWebViews()
     }
     
     func setupWebViews() {
@@ -57,34 +56,30 @@ class PartyViewController: UIViewController, WKNavigationDelegate {
         let url = Bundle.main.url(forResource: "app4", withExtension: "html", subdirectory: "public")!
         webView.loadFileURL(url, allowingReadAccessTo: url)
         self.view.addSubview(webView)
-        webViewIsSetup = true
     }
     
-    
-    
-    
-     
-     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         var url = ""
         let vc = ViewController()
         if navigationAction.request.url?.absoluteString != nil {
-            if (urlContains(str: "getRolling:::", url: navigationAction.request.url!.absoluteString)) {
+            let currentUrl = navigationAction.request.url!.absoluteString
+            if (urlContains(str: "getRolling:::", url: currentUrl)) {
                 url = navigationAction.request.url!.absoluteString
                 let partyNameParsed = url.components(separatedBy: ":::")
                 partyName = partyNameParsed[1]
                 findParty()
-            } else if (urlContains(str: "prev", url: navigationAction.request.url!.absoluteString)) {
+            } else if (urlContains(str: "prev", url: currentUrl)) {
                 vc.skipPrevious()
-            } else if (urlContains(str: "pause", url: navigationAction.request.url!.absoluteString)) {
+            } else if (urlContains(str: "pause", url: currentUrl)) {
                 vc.playPause()
-            } else if (urlContains(str: "/song/", url: navigationAction.request.url!.absoluteString)) {
+            } else if (urlContains(str: "/song/", url: currentUrl)) {
                 url = navigationAction.request.url!.absoluteString
                 let str = url.components(separatedBy: "/song/")
                 let song = str[1].components(separatedBy: ":::")[0]
                 vc.playSong(song: song)
-            } else if (urlContains(str: "terminate", url: navigationAction.request.url!.absoluteString)) {
+            } else if (urlContains(str: "terminate", url: currentUrl)) {
 
-            } else if (urlContains(str: "softterminate", url: navigationAction.request.url!.absoluteString)) {
+            } else if (urlContains(str: "softterminate", url: currentUrl)) {
 
             }
         }

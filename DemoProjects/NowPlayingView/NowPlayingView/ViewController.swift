@@ -13,7 +13,7 @@ class ViewController: PartyViewController,
     private let name = "Now Playing View"
 
     private var currentPodcastSpeed: SPTAppRemotePodcastPlaybackSpeed?
-    var timerInterval = 1.2
+    var timerInterval = 15.0
     // MARK: - Lifecycle
 
     private var connectionIndicatorView = ConnectionStatusIndicatorView()
@@ -172,7 +172,7 @@ class ViewController: PartyViewController,
     }
 
     private func updatePlayerStateSubscriptionButtonState() {
-        let playerStateSubscriptionButtonTitle = subscribedToPlayerState ? "Unsubscribe" : "Subscribe"
+        //let playerStateSubscriptionButtonTitle = subscribedToPlayerState ? "Unsubscribe" : "Subscribe"
         //playerStateSubscriptionButton.setTitle(playerStateSubscriptionButtonTitle, for: UIControl.State())
     }
 
@@ -505,7 +505,7 @@ class ViewController: PartyViewController,
     
     func updateState() {
         if (appRemote.isConnected) {
-            unsubscribeFromPlayerState()
+            //unsubscribeFromPlayerState()
             subscribeToPlayerState()
         } else {
             connect()
@@ -524,7 +524,7 @@ class ViewController: PartyViewController,
                 } else if (timeRemaining < 30) {
                     timerInterval = 1.2
                 } else {
-                    timerInterval = 1.2
+                    timerInterval = 15.0
                 }
             }
             else {
